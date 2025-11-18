@@ -1,0 +1,8 @@
+{
+  "name": "pdf-mcp-server",
+  "description": "Parse trucking load PDFs to normalized JSON",
+  "command": "node",
+  "args": ["index.mjs"],
+  "env": {},
+  "metadata": { "version": "0.1.0" }
+}

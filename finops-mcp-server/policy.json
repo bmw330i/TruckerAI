@@ -1,0 +1,27 @@
+{
+  "region": "Vacaville-CA",
+  "equipment_rpm_floor": {
+    "dry-van": 2.4,
+    "reefer": 2.9,
+    "flatbed": 2.7
+  },
+  "weights": {
+    "rpm": 0.30,
+    "deadhead": 0.15,
+    "transit_fit": 0.15,
+    "lane_desirability": 0.10,
+    "risk_broker": 0.10,
+    "operational_friction": 0.10,
+    "equip_fit": 0.05,
+    "regulatory": 0.05
+  },
+  "deadhead": { "warn_miles": 50, "max_miles": 120 },
+  "fuel_price_usd_per_gal": 5.00,
+  "driver_cost_usd_per_hour": 36,
+  "mpg": { "dry-van": 6.5, "reefer": 6.0, "flatbed": 6.0 },
+  "regulatory": {
+    "carb_reefer_required": true,
+    "winter_chain_window": { "start_mmdd": "11-01", "end_mmdd": "04-15" }
+  },
+  "risk": { "min_credit_score": 70, "max_terms_days": 45, "quickpay_fee_pct_warn": 3 }
+}

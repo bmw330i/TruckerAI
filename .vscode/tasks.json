@@ -1,0 +1,30 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "npm install pdf-mcp-server",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"install",
+				"--prefix",
+				"pdf-mcp-server"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "git: init and push origin",
+			"type": "shell",
+			"command": "bash",
+			"args": [
+				"-lc",
+				"set -euo pipefail\ncd /Users/david/Documents/TruckerAI\nif [ ! -d .git ]; then git init; fi\ngit checkout -B main\nif git remote get-url origin >/dev/null 2>&1; then\n  git remote set-url origin https://github.com/bmw330i/TruckerAI\nelse\n  git remote add origin https://github.com/bmw330i/TruckerAI\nfi\ngit add .\nif git diff --cached --quiet; then\n  echo \"No changes to commit\"\nelse\n  git commit -m \"Initial scaffold: MCP servers (pdf, db, finops) and env setup\"\nfi\ngit push -u origin main"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}

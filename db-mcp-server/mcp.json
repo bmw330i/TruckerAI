@@ -1,0 +1,8 @@
+{
+  "name": "db-mcp-server",
+  "description": "Persist and query JSON documents",
+  "command": "node",
+  "args": ["index.mjs"],
+  "env": {},
+  "metadata": { "version": "0.1.0" }
+}

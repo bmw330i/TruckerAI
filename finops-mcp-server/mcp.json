@@ -1,0 +1,8 @@
+{
+  "name": "finops-mcp-server",
+  "description": "Assess trucking loads and provide recommendations",
+  "command": "node",
+  "args": ["index.mjs"],
+  "env": {},
+  "metadata": { "version": "0.1.0" }
+}
