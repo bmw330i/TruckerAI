@@ -6,8 +6,7 @@
   "description": "MCP server to score trucking loads and recommend actions",
   "scripts": {
     "start": "node index.mjs",
-    "dev": "node index.mjs",
-    "install": "npm install"
+    "dev": "node index.mjs"
   },
   "dependencies": {
     "zod": "^3.23.8"
