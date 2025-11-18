@@ -10,7 +10,6 @@
     "install": "npm install"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^0.1.0",
     "pdf-parse": "^1.1.1",
     "yaml": "^2.5.0",
     "zod": "^3.23.8"
