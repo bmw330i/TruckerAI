@@ -15,12 +15,50 @@
 			"group": "build"
 		},
 		{
-			"label": "git: init and push origin",
+			"label": "npm install db-mcp-server",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"install",
+				"--prefix",
+				"db-mcp-server"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "npm install finops-mcp-server",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"install",
+				"--prefix",
+				"finops-mcp-server"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "npm install (all)",
 			"type": "shell",
 			"command": "bash",
 			"args": [
 				"-lc",
-				"set -euo pipefail\ncd /Users/david/Documents/TruckerAI\nif [ ! -d .git ]; then git init; fi\ngit checkout -B main\nif git remote get-url origin >/dev/null 2>&1; then\n  git remote set-url origin https://github.com/bmw330i/TruckerAI\nelse\n  git remote add origin https://github.com/bmw330i/TruckerAI\nfi\ngit add .\nif git diff --cached --quiet; then\n  echo \"No changes to commit\"\nelse\n  git commit -m \"Initial scaffold: MCP servers (pdf, db, finops) and env setup\"\nfi\ngit push -u origin main"
+				"set -euo pipefail; npm install --prefix pdf-mcp-server; npm install --prefix db-mcp-server; npm install --prefix finops-mcp-server"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "git: init and push origin (force)",
+			"type": "shell",
+			"command": "bash",
+			"args": [
+				"-lc",
+				"set -euo pipefail\ncd /Users/david/Documents/TruckerAI\nif [ ! -d .git ]; then git init; fi\ngit checkout -B main\nif git remote get-url origin >/dev/null 2>&1; then\n  git remote set-url origin https://github.com/bmw330i/TruckerAI\nelse\n  git remote add origin https://github.com/bmw330i/TruckerAI\nfi\ngit add .\nif git diff --cached --quiet; then\n  echo \"No changes to commit\"\nelse\n  git commit -m \"Initial scaffold: MCP servers (pdf, db, finops) and env setup\"\nfi\n# Force push so origin exactly matches local main\ngit push -u origin +main"
 			],
 			"isBackground": false,
 			"problemMatcher": [],

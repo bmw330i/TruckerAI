@@ -13,6 +13,10 @@ coverage/
 data/
 *.log
 .env
+.gitignore
 
 # macOS
 .DS_Store
+
+# VSC
+.vscode/
