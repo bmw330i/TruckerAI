@@ -46,7 +46,7 @@
 			"command": "bash",
 			"args": [
 				"-lc",
-				"set -euo pipefail; npm install --prefix pdf-mcp-server; npm install --prefix db-mcp-server; npm install --prefix finops-mcp-server"
+				"set -euo pipefail; (cd pdf-mcp-server && npm install); (cd db-mcp-server && npm install); (cd finops-mcp-server && npm install)"
 			],
 			"isBackground": false,
 			"problemMatcher": [],

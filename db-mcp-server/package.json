@@ -6,7 +6,8 @@
   "description": "MCP server to persist and query JSON documents for trucking loads",
   "scripts": {
     "start": "node index.mjs",
-    "dev": "node index.mjs"
+    "dev": "node index.mjs",
+    "install": "npm install"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^0.1.0",

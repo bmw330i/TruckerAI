@@ -1,28 +1,55 @@
-// pdf-mcp-server (scaffold)
-// NOTE: This is a lightweight scaffold. Handlers are placeholders.
+// pdf-mcp-server (updated scaffold)
+// Now uses Python script for PDF extraction via subprocess.
 
-// Future: import { Server } from '@modelcontextprotocol/sdk/server';
-// Future: import { StdioServerTransport } from '@modelcontextprotocol/sdk/stdio-transport';
+import { spawn } from 'child_process';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+
+const PYTHON_VENV = path.join(process.cwd(), '..', '..', '.venv', 'bin', 'python');
+const EXTRACT_SCRIPT = path.join(process.cwd(), 'extract_pdf.py');
 
 // Placeholder tool handlers (to be implemented)
 async function parsePdfTool(input) {
-  return {
-    text: "",
-    pages: [],
-    metadata: { pageCount: 0, fileName: input?.path || "" }
-  };
+  const pdfPath = input?.path;
+  if (!pdfPath) return { error: "No PDF path provided" };
+
+  try {
+    await fs.access(pdfPath); // Check if file exists
+  } catch {
+    return { error: "PDF file not found" };
+  }
+
+  return new Promise((resolve) => {
+    const python = spawn(PYTHON_VENV, [EXTRACT_SCRIPT, pdfPath], { stdio: ['pipe', 'pipe', 'pipe'] });
+    let stdout = '';
+    let stderr = '';
+
+    python.stdout.on('data', (data) => stdout += data.toString());
+    python.stderr.on('data', (data) => stderr += data.toString());
+
+    python.on('close', (code) => {
+      if (code !== 0) {
+        resolve({ error: `Python script failed: ${stderr}` });
+      } else {
+        try {
+          const result = JSON.parse(stdout);
+          resolve(result);
+        } catch (e) {
+          resolve({ error: `JSON parse error: ${e.message}` });
+        }
+      }
+    });
+  });
 }
 
 async function extractLoadDataTool(input) {
-  return {
-    load: {
-      load_id: null,
-      equipment: null,
-      pickup: { date: null, location: { city: null, state: null } },
-      delivery: { date: null, location: { city: null, state: null } },
-      linehaul_usd: null
-    }
-  };
+  const pdfPath = input?.path;
+  if (!pdfPath) return { error: "No PDF path provided" };
+
+  const result = await parsePdfTool({ path: pdfPath });
+  if (result.error) return { error: result.error };
+
+  return { load: result };
 }
 
 // Minimal process binding so clients know it launched
