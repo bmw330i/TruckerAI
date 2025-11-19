@@ -16,7 +16,9 @@ def extract_text_from_pdf(pdf_path):
     with pdfplumber.open(pdf_path) as pdf:
         text = ""
         for page in pdf.pages:
-            text += page.extract_text() + "\n"
+            page_text = page.extract_text()
+            if page_text:
+                text += page_text + "\n"
     return text
 
 def parse_load_offer(text):
@@ -70,7 +72,7 @@ def parse_load_offer(text):
     if pickup_match:
         load["pickup"]["location"]["city"] = pickup_match.group(1).strip()
 
-    delivery_match = re.search(r'Delivery|Destination[:\s]*([A-Za-z\s,]+)', text, re.I)
+    delivery_match = re.search(r'(?:Delivery|Destination)[:\s]*([A-Za-z\s,]+)', text, re.I)
     if delivery_match:
         load["delivery"]["location"]["city"] = delivery_match.group(1).strip()
 
